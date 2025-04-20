@@ -7,6 +7,7 @@ enum class Direction {
     U, UR, R, DR, D, DL, L, UL
 };
 
+
 enum class Action {
     MOVE_FORWARD,
     MOVE_BACKWARD,
@@ -18,7 +19,9 @@ enum class Action {
     NONE // in case of no valid action
 };
 
+
 class Tank {
+    friend int main(int argc, char* argv[]); // TODO remove
 public:
     Tank(int playerId, int x, int y, Direction dir);
 
@@ -66,3 +69,7 @@ private:
     int backwardDelay = 0;
     bool backwardRequested = false;
 };
+
+
+std::string toString(Direction dir);
+std::string toString(Action ac);

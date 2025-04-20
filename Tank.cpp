@@ -95,3 +95,32 @@ void Tank::moveBackward() {
         case Direction::UL: x++; y++; break;
     }
 }
+
+
+
+std::string toString(Direction dir) {
+    switch (dir) {
+        case Direction::U:  return "↑";
+        case Direction::UR: return "↗";
+        case Direction::R:  return "→";
+        case Direction::DR: return "↘";
+        case Direction::D:  return "↓";
+        case Direction::DL: return "↙";
+        case Direction::L:  return "←";
+        case Direction::UL: return "↖";
+    }
+    return "🔃"; // Fallback
+}
+std::string toString(Action ac){
+    switch (ac) {
+        case Action::MOVE_FORWARD: return "MOVE_FORWARD";
+        case Action::MOVE_BACKWARD: return "MOVE_BACKWARD";
+        case Action::ROTATE_LEFT_EIGHTH: return "ROTATE_LEFT_EIGHTH";
+        case Action::ROTATE_RIGHT_EIGHTH: return "ROTATE_RIGHT_EIGHTH";
+        case Action::ROTATE_LEFT_QUARTER: return "ROTATE_LEFT_QUARTER";
+        case Action::ROTATE_RIGHT_QUARTER: return "ROTATE_RIGHT_QUARTER";
+        case Action::SHOOT: return "SHOOT";
+        case Action::NONE: return "NONE";
+    }
+    return "UNKNOWN_ACTION"; // Fallback
+}

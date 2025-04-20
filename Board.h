@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <string>
-
+#include "Tank.h"
 enum class CellContent {
     EMPTY,
     WALL,
@@ -19,8 +19,10 @@ struct Cell {
 
 class Board {
 public:
+    friend int main(int argc, char* argv[]); // TODO remove
+    
     Board(const std::string& filePath);
-    void print() const;
+    void print(Direction dir1,Direction dir2) const;
     int getWidth() const;
     int getHeight() const;
     Cell getCell(int x, int y) const;

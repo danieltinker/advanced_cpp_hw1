@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Tank.h"
 #include <iostream>
+#include "tankAlgorithm.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -12,17 +13,20 @@ int main(int argc, char* argv[]) {
     try {
         Board board(argv[1]);
         GameState game(board);
-
-        // while (!game.isGameOver()) {
-        for (int i = 0; i < 20; ++i) {
-            auto [x1, y1] = game.getTank1Position();
-            auto [x2, y2] = game.getTank2Position();
-            Action p1 = game.chaseTarget(x1, y1, x2, y2);
-            Action p2 = Action::MOVE_FORWARD;
-
-            game.step(p1, p2);
+        board.print(game.tank1.getDirection(), game.tank2.getDirection()); // TODO, board should have it
+            
+        while (!game.isGameOver()) {
+            auto tank1Position = game.getTank1Position();
+            auto tank2Position = game.getTank2Position();
+            auto tank1Direction = game.tank1.getDirection();
+            auto tank1Cooldown = game.tank1.shootCooldown;
+            Action p1 = decideTank1(board.grid, tank1Position, tank1Direction, tank1Cooldown, tank2Position);//Action::NONE;//
+            auto tank2Direction = game.tank2.getDirection();
+            auto tank2Cooldown = game.tank2.shootCooldown;
+            Action p2 = decideTank2(board.grid, tank2Position, tank2Direction, tank2Cooldown, tank1Position);//Action::NONE;//
+            bool over = game.step(p1, p2);
+            std::cout << "Taken actions: " << toString(p1) << " " << toString(p2) << "\n";
             game.render();
-            std::cout << "---\n";
         }
         
     } catch (const std::exception& e) {

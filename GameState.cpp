@@ -24,19 +24,7 @@ GameState::GameState(Board& board): board(board),
 
 
 
-// --- Simple Reactive AI for Tank 2 ---
-Action simpleReactive(const Tank& tank, const std::vector<Shell>& shells, const Board& board) {
-    auto [tx, ty] = tank.getPosition();
-    for (const auto& shell : shells) {
-        int dx = std::abs(shell.x - tx);
-        int dy = std::abs(shell.y - ty);
-        if (dx <= 2 && dy <= 2) {
-            return Action::ROTATE_LEFT_QUARTER; // dodge reflex
-        }
-    }
-    if (tank.canShoot()) return Action::SHOOT;
-    return Action::MOVE_FORWARD;
-}
+
 
 void GameState::applyAction(Tank& tank, Action action) {
     if (tank.isWaitingToMoveBack()) return;
@@ -71,8 +59,8 @@ void GameState::applyAction(Tank& tank, Action action) {
 
 
 // --- Main Game Tick Step ---
-void GameState::step(Action p1Action, Action p2Action) {
-    if (gameOver) return;
+bool GameState::step(Action p1Action, Action p2Action) {
+    if (gameOver) return true;
 
     auto [x1, y1] = tank1.getPosition();
     auto [x2, y2] = tank2.getPosition();
@@ -84,9 +72,6 @@ void GameState::step(Action p1Action, Action p2Action) {
         tank2.destroy();
         board.setCell(x2, y2, CellContent::EMPTY);
     }
-
-    p2Action = simpleReactive(tank2, shells, board);
-    logFile << "P1: " << static_cast<int>(p1Action) << ", P2: " << static_cast<int>(p2Action) << "\n";
 
     tank1.updateCooldowns();
     tank2.updateCooldowns();
@@ -194,6 +179,7 @@ void GameState::step(Action p1Action, Action p2Action) {
         logFile << "Result: " << gameResult << "\n";
         logFile.close();
     }
+    return gameOver;
 }
 
 
@@ -216,50 +202,8 @@ std::pair<int, int> GameState::getTank2Position() const {
     return tank2.getPosition();
 }
 
-Action GameState::chaseTarget(int srcX, int srcY, int tgtX, int tgtY) {
-    std::queue<std::pair<int, int>> q;
-    std::vector<std::vector<bool>> visited(board.getHeight(), std::vector<bool>(board.getWidth(), false));
-    std::vector<std::vector<std::pair<int, int>>> parent(board.getHeight(), std::vector<std::pair<int, int>>(board.getWidth(), {-1, -1}));
-
-    q.push({srcX, srcY});
-    visited[srcY][srcX] = true;
-
-    int dx[] = {0, 1, 0, -1};
-    int dy[] = {-1, 0, 1, 0};
-
-    while (!q.empty()) {
-        auto [x, y] = q.front(); q.pop();
-        if (x == tgtX && y == tgtY) break;
-
-        for (int d = 0; d < 4; ++d) {
-            int nx = x + dx[d];
-            int ny = y + dy[d];
-            if (nx >= 0 && ny >= 0 && nx < board.getWidth() && ny < board.getHeight()) {
-                if (!visited[ny][nx] && board.getCell(nx, ny).content == CellContent::EMPTY) {
-                    visited[ny][nx] = true;
-                    parent[ny][nx] = {x, y};
-                    q.push({nx, ny});
-                }
-            }
-        }
-    }
-
-    std::pair<int, int> cur = {tgtX, tgtY};
-    while (parent[cur.second][cur.first] != std::make_pair(srcX, srcY)) {
-        cur = parent[cur.second][cur.first];
-        if (cur == std::make_pair(-1, -1)) return Action::NONE;
-    }
-    int dx1 = cur.first - srcX;
-    int dy1 = cur.second - srcY;
-    if (dx1 == 0 && dy1 == -1) return Action::MOVE_FORWARD;
-    if (dx1 == 0 && dy1 == 1) return Action::MOVE_BACKWARD;
-    if (dx1 == 1 && dy1 == 0) return Action::ROTATE_RIGHT_EIGHTH;
-    if (dx1 == -1 && dy1 == 0) return Action::ROTATE_LEFT_EIGHTH;
-    return Action::NONE;
-}
-
 void GameState::render() const {
-    board.print();
+    board.print(tank1.getDirection(), tank2.getDirection()); // TODO board should have it
     if (gameOver) {
         std::cout << "GAME OVER: " << gameResult << "\n";
     }

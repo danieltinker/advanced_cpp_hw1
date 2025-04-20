@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
-
+#include "Tank.h"
 Board::Board(const std::string& filePath) {
     parseBoardFile(filePath);
 }
@@ -16,6 +16,7 @@ void Board::parseBoardFile(const std::string& filePath) {
     grid.resize(height, std::vector<Cell>(width));
 
     std::string line;
+    std::getline(file, line); // ignoring the first size defining line
     for (int y = 0; y < height && std::getline(file, line); ++y) {
         for (int x = 0; x < width && x < (int)line.size(); ++x) {
             switch (line[x]) {
@@ -30,15 +31,15 @@ void Board::parseBoardFile(const std::string& filePath) {
     }
 }
 
-void Board::print() const {
+void Board::print(Direction dir1,Direction dir2) const {
     for (const auto& row : grid) {
         for (const auto& cell : row) {
-            char c = ' ';
+            std::string c = " ";
             switch (cell.content) {
                 case CellContent::WALL:  c = '#'; break;
                 case CellContent::MINE:  c = '@'; break;
-                case CellContent::TANK1: c = '1'; break;
-                case CellContent::TANK2: c = '2'; break;
+                case CellContent::TANK1: c = "\033[31m"+toString(dir1)+"\033[0m"; break; // TODO need to use the actual dir once tanks are held in board and not state
+                case CellContent::TANK2: c = "\033[34m"+toString(dir2)+"\033[0m";  break;
                 case CellContent::SHELL: c = '*'; break;
                 case CellContent::EMPTY: c = ' '; break;
             }
