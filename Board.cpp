@@ -3,6 +3,9 @@
 #include <iostream>
 #include <stdexcept>
 #include "Tank.h"
+#include <sstream>
+
+
 Board::Board(const std::string& filePath) {
     parseBoardFile(filePath);
 }
@@ -31,7 +34,8 @@ void Board::parseBoardFile(const std::string& filePath) {
     }
 }
 
-void Board::print(Direction dir1,Direction dir2) const {
+std::string Board::print(Direction dir1,Direction dir2) const {
+    std::ostringstream oss;
     for (const auto& row : grid) {
         for (const auto& cell : row) {
             std::string c = " ";
@@ -43,10 +47,11 @@ void Board::print(Direction dir1,Direction dir2) const {
                 case CellContent::SHELL: c = '*'; break;
                 case CellContent::EMPTY: c = ' '; break;
             }
-            std::cout << c;
+            oss << c;
         }
-        std::cout << '\n';
-    }
+        oss << '\n';
+    }  
+    return oss.str();
 }
 
 int Board::getWidth() const { return width; }

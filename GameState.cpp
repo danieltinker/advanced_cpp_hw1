@@ -1,8 +1,3 @@
-// ===============================
-// File: GameState.cpp
-// Implementation of GameState class and reactive tank logic
-// ===============================
-
 #include "GameState.h"
 #include <map>
 #include <set>
@@ -11,6 +6,8 @@
 #include <fstream>
 #include <cmath>
 
+
+using namespace std;
 // --- Global Game State Flags ---
 int emptyAmmoSteps = 0;
 bool gameOver = false;
@@ -202,10 +199,11 @@ std::pair<int, int> GameState::getTank2Position() const {
     return tank2.getPosition();
 }
 
-void GameState::render() const {
-    board.print(tank1.getDirection(), tank2.getDirection()); // TODO board should have it
+std::string GameState::render() const {
     if (gameOver) {
-        std::cout << "GAME OVER: " << gameResult << "\n";
+        return board.print(tank1.getDirection(), tank2.getDirection()) + "GAME OVER: " + gameResult + "\n";
+    }else{
+        return  board.print(tank1.getDirection(), tank2.getDirection()) + "\n";
     }
 }
 

@@ -10,6 +10,8 @@
 #include <utility>
 #include <vector>
 
+using namespace std;
+
 struct Shell {
     int x, y;
     Direction dir;
@@ -22,7 +24,7 @@ public:
 
     // Primary step update function
     bool step(Action p1Action, Action p2Action);
-    void render() const;
+    std::string render() const;
 
     // Utility interface
     std::pair<int, int> getTank1Position() const;

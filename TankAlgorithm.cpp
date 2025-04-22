@@ -6,6 +6,7 @@
 #include "Tank.h"
 #include "Board.h"
 #include <algorithm>
+#include "GameState.h"
 
 
 using Position = std::pair<int,int>;
@@ -76,7 +77,6 @@ std::vector<Position> findPath(
     while(!open.empty()) {
         auto [f, cur] = open.top(); open.pop();
         if(cur == goal) break;
-        // Skip if we've found a better path already
         if(f > gScore[cur.second][cur.first] + heur(cur)) continue;
         for(int d=0; d<8; ++d) {
             Position nb{cur.first + dirOffsets[d].first,
@@ -135,7 +135,6 @@ Action decideTank1(
     Position pos2)
 {
     if(shootCooldown1 > 0) --shootCooldown1;
-    // Try shoot if possible
     if(shootCooldown1 == 0 && hasLineOfSight(grid, pos1, pos2)) {
         Direction toT = directionTo(pos1, pos2);
         if(facing1 == toT) {
@@ -144,14 +143,12 @@ Action decideTank1(
         }
         return rotateTowards(facing1, toT);
     }
-    // Move along A* path
     auto path = findPath(grid, pos1, pos2);
     if(path.size() >= 2) {
         Position next = path[1];
         Direction want = directionTo(pos1, next);
         if(facing1 != want)
             return rotateTowards(facing1, want);
-        // next cell guaranteed free
         return Action::MOVE_FORWARD;
     }
     return Action::NONE;
@@ -162,29 +159,53 @@ Action decideTank2(
     const std::vector<std::vector<Cell>>& grid,
     Position pos2, Direction& facing2,
     int& backwardCooldown2,
-    Position pos1)
+    Position pos1,
+    const std::vector<Shell>& shells)
 {
     if(backwardCooldown2 > 0) --backwardCooldown2;
-    // Determine away direction
-    Direction from1 = directionTo(pos1, pos2);
-    int oppDir = (static_cast<int>(from1) + 4) % 8;
-    Direction want = static_cast<Direction>(oppDir);
 
-    if(facing2 == want) {
-        // Attempt backward step (i.e., opposite of facing)
-        Position step{-dirOffsets[static_cast<int>(facing2)].first,
-                      -dirOffsets[static_cast<int>(facing2)].second};
-        Position target{pos2.first + step.first, pos2.second + step.second};
-        if(backwardCooldown2 == 0 && inBounds(grid, target)) {
-            auto c = grid[target.second][target.first].content;
-            if(c != CellContent::WALL && c != CellContent::MINE) {
-                backwardCooldown2 = 2;
-                return Action::MOVE_BACKWARD;
+    // Shell dodging
+    for(const auto& s : shells) {
+        Position sp{s.x, s.y};
+        for(int i = 1; i <= 5; ++i) {
+            Position pred{sp.first + dirOffsets[static_cast<int>(s.dir)].first * i,
+                          sp.second + dirOffsets[static_cast<int>(s.dir)].second * i};
+            if(pred == pos2) {
+                // Try sidestepping
+                int right = (static_cast<int>(facing2) + 2) % 8;
+                int left = (static_cast<int>(facing2) + 6) % 8;
+                Position rpos{pos2.first + dirOffsets[right].first, pos2.second + dirOffsets[right].second};
+                Position lpos{pos2.first + dirOffsets[left].first,  pos2.second + dirOffsets[left].second};
+
+                if(inBounds(grid, rpos) && grid[rpos.second][rpos.first].content == CellContent::EMPTY) {
+                    if(facing2 != static_cast<Direction>(right))
+                        return rotateTowards(facing2, static_cast<Direction>(right));
+                    return Action::MOVE_FORWARD;
+                }
+                if(inBounds(grid, lpos) && grid[lpos.second][lpos.first].content == CellContent::EMPTY) {
+                    if(facing2 != static_cast<Direction>(left))
+                        return rotateTowards(facing2, static_cast<Direction>(left));
+                    return Action::MOVE_FORWARD;
+                }
+                return Action::ROTATE_LEFT_EIGHTH;
             }
         }
     }
-    // Otherwise rotate away from pursuer
-    return rotateTowards(facing2, want);
-}
 
-// Usage: maintain each tank's state (position, facing, cooldowns) and call decideTank1/2 per tick.
+    Direction from1 = directionTo(pos1, pos2);
+    int dirIndex = static_cast<int>(from1);
+    int tangentDir = (dirIndex + 2) % 8;
+    Direction want = static_cast<Direction>(tangentDir);
+
+    if(facing2 != want) return rotateTowards(facing2, want);
+
+    Position step = dirOffsets[static_cast<int>(facing2)];
+    Position target{pos2.first + step.first, pos2.second + step.second};
+    if(inBounds(grid, target)) {
+        auto c = grid[target.second][target.first].content;
+        if(c == CellContent::EMPTY)
+            return Action::MOVE_FORWARD;
+    }
+
+    return Action::NONE;
+}

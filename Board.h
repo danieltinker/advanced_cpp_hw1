@@ -22,7 +22,7 @@ public:
     friend int main(int argc, char* argv[]); // TODO remove
     
     Board(const std::string& filePath);
-    void print(Direction dir1,Direction dir2) const;
+    std::string print(Direction dir1,Direction dir2) const;
     int getWidth() const;
     int getHeight() const;
     Cell getCell(int x, int y) const;
