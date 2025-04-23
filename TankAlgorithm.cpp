@@ -53,7 +53,7 @@ Action rotateTowards(Direction current, Direction target) {
 // A* pathfinding avoiding walls and mines
 std::vector<Position> findPath(
     const std::vector<std::vector<Cell>>& grid,
-    Position start, Position goal)
+    Position start, Position goal, CellContent otherTank)
 {
     if(!inBounds(grid,start) || !inBounds(grid,goal)) return {};
     int H = grid.size(), W = grid[0].size();
@@ -143,7 +143,7 @@ Action decideTank1(
         }
         return rotateTowards(facing1, toT);
     }
-    auto path = findPath(grid, pos1, pos2);
+    auto path = findPath(grid, pos1, pos2,CellContent::TANK2);
     if(path.size() >= 2) {
         Position next = path[1];
         Direction want = directionTo(pos1, next);
