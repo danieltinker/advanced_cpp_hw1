@@ -1,0 +1,3 @@
+/Users/danielbaruch/Documents/Git/advanced_cpp_hw1/build/CMakeFiles/tank_game.dir
+/Users/danielbaruch/Documents/Git/advanced_cpp_hw1/build/CMakeFiles/edit_cache.dir
+/Users/danielbaruch/Documents/Git/advanced_cpp_hw1/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/tank_game.dir/main.cpp.o CMakeFiles/tank_game.dir/Board.cpp.o CMakeFiles/tank_game.dir/Tank.cpp.o CMakeFiles/tank_game.dir/GameState.cpp.o CMakeFiles/tank_game.dir/TankAlgorithm.cpp.o -o tank_game 
