@@ -15,13 +15,13 @@ void clear_screen() {
 }
 
 char get_key() {
-struct termios oldt, newt;
+    struct termios oldt, newt;
     char ch;
     
     tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;
     
-    newt.c_lflag &= ~(ICANON | ECHO); // disable buffering and echo
+    newt.c_lflag &= ~(ICANON | ECHO); 
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
     
     read(STDIN_FILENO, &ch, 1);
@@ -73,8 +73,8 @@ int main(int argc, char* argv[]) {
             char ch = get_key();
     
             if (ch == 'q') break;
-            else if (ch == '\033') { // Escape sequence
-                get_key(); // skip [
+            else if (ch == '\033') { // Escape
+                get_key(); 
                 ch = get_key();
                 if (ch == 'C') { // Right arrow
                     if (index < moves.size() - 1) index++;
@@ -85,7 +85,6 @@ int main(int argc, char* argv[]) {
         }
     
         clear_screen();
-        printf("Exited slideshow.\n");
         return 0;
         
     } catch (const std::exception& e) {

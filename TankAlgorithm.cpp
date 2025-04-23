@@ -127,7 +127,6 @@ bool hasLineOfSight(
     return true;
 }
 
-// --- Tank1 AI ---
 Action decideTank1(
     const std::vector<std::vector<Cell>>& grid,
     Position pos1, Direction& facing1,
@@ -154,7 +153,6 @@ Action decideTank1(
     return Action::NONE;
 }
 
-// --- Tank2 AI ---
 Action decideTank2(
     const std::vector<std::vector<Cell>>& grid,
     Position pos2, Direction& facing2,
