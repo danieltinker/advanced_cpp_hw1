@@ -12,9 +12,14 @@ enum class CellContent {
     SHELL
 };
 
+// struct Cell {
+//     CellContent content = CellContent::EMPTY;
+//     int wallHits = 0;
+// };
 struct Cell {
     CellContent content = CellContent::EMPTY;
     int wallHits = 0;
+    bool hasShellOverlay = false;  // NEW: tracks if a shell passed here
 };
 
 class Board {

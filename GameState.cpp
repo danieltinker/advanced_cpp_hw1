@@ -88,6 +88,7 @@ bool GameState::step(Action p1Action, Action p2Action) {
     if (tank2.isAlive()) board.setCell(x2, y2, CellContent::TANK2);
 
     board.clearShellMarks();
+    std::set<size_t> toRemove;
     std::map<std::pair<int, int>, std::vector<size_t>> positionMap;
     for (size_t i = 0; i < shells.size(); ++i) {
         int dx = 0, dy = 0;
@@ -104,10 +105,29 @@ bool GameState::step(Action p1Action, Action p2Action) {
         shells[i].x += dx;
         shells[i].y += dy;
         board.wrapCoords(shells[i].x, shells[i].y);
+
+        // Check mid-point for overrun collision
+        int midX = shells[i].x - dx / 2;
+        int midY = shells[i].y - dy / 2;
+        board.wrapCoords(midX, midY);
+
+        if (tank1.isAlive() && midX == tank1.getPosition().first && midY == tank1.getPosition().second) {
+            tank1.destroy();
+            board.setCell(midX, midY, CellContent::EMPTY);
+            toRemove.insert(i);
+            continue;
+        }
+        if (tank2.isAlive() && midX == tank2.getPosition().first && midY == tank2.getPosition().second) {
+            tank2.destroy();
+            board.setCell(midX, midY, CellContent::EMPTY);
+            toRemove.insert(i);
+            continue;
+        }
+
+        
         positionMap[{shells[i].x, shells[i].y}].push_back(i);
     }
 
-    std::set<size_t> toRemove;
     for (const auto& [pos, indices] : positionMap) {
         int x = pos.first, y = pos.second;
         auto cell = board.getCell(x, y);
@@ -137,7 +157,7 @@ bool GameState::step(Action p1Action, Action p2Action) {
     for (size_t i = 0; i < shells.size(); ++i) {
         if (toRemove.find(i) == toRemove.end()) {
             remaining.push_back(shells[i]);
-            board.setCell(shells[i].x, shells[i].y, CellContent::SHELL);
+            board.grid[shells[i].y][shells[i].x].hasShellOverlay = true;
         }
     }
     shells = std::move(remaining);
@@ -145,11 +165,35 @@ bool GameState::step(Action p1Action, Action p2Action) {
     if (p1Action == Action::SHOOT && tank1.canShoot()) {
         tank1.shoot();
         auto [sx, sy] = tank1.getPosition();
+        int dx = 0, dy = 0;
+        switch (tank1.getDirection()) {
+            case Direction::U:  dy = -1; break;
+            case Direction::UR: dx = 1; dy = -1; break;
+            case Direction::R:  dx = 1; break;
+            case Direction::DR: dx = 1; dy = 1; break;
+            case Direction::D:  dy = 1; break;
+            case Direction::DL: dx = -1; dy = 1; break;
+            case Direction::L:  dx = -1; break;
+            case Direction::UL: dx = -1; dy = -1; break;
+        }
+        board.wrapCoords(sx += dx, sy += dy);
         shells.push_back({sx, sy, tank1.getDirection()});
     }
     if (p2Action == Action::SHOOT && tank2.canShoot()) {
         tank2.shoot();
         auto [sx, sy] = tank2.getPosition();
+        int dx = 0, dy = 0;
+        switch (tank2.getDirection()) {
+            case Direction::U:  dy = -1; break;
+            case Direction::UR: dx = 1; dy = -1; break;
+            case Direction::R:  dx = 1; break;
+            case Direction::DR: dx = 1; dy = 1; break;
+            case Direction::D:  dy = 1; break;
+            case Direction::DL: dx = -1; dy = 1; break;
+            case Direction::L:  dx = -1; break;
+            case Direction::UL: dx = -1; dy = -1; break;
+        }
+        board.wrapCoords(sx += dx, sy += dy);
         shells.push_back({sx, sy, tank2.getDirection()});
     }
 

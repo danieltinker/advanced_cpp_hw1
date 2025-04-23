@@ -22,6 +22,7 @@ void Board::parseBoardFile(const std::string& filePath) {
     file.seekg(0, std::ios::beg); 
     std::string line;
     std::getline(file, line); // ignoring the first size defining line
+    // std::cout << line << std::endl;
     for (int y = 0; y < height && std::getline(file, line); ++y) {
         for (int x = 0; x < width && x < (int)line.size(); ++x) {
             switch (line[x]) {
@@ -36,11 +37,18 @@ void Board::parseBoardFile(const std::string& filePath) {
     }
 }
 
+
+
+
+
 std::string Board::print(Direction dir1,Direction dir2) const {
     std::ostringstream oss;
     for (const auto& row : grid) {
         for (const auto& cell : row) {
             std::string c = " ";
+            if (cell.hasShellOverlay) {
+                c = '*';  // shell overlay takes precedence
+            } else {
             switch (cell.content) {
                 case CellContent::WALL:  c = "■"; break;
                 case CellContent::MINE:  c = '@'; break;
@@ -49,6 +57,7 @@ std::string Board::print(Direction dir1,Direction dir2) const {
                 case CellContent::SHELL: c = "⋅"; break;
                 case CellContent::EMPTY: c = "_"; break;
             }
+        }
             oss << c;
         }
         oss << '\n';
@@ -76,11 +85,19 @@ void Board::clearTankMarks() {
     }
 }
 
+// void Board::clearShellMarks() {
+//     for (auto& row : grid) {
+//         for (auto& cell : row) {
+//             if (cell.content == CellContent::SHELL)
+//                 cell.content = CellContent::EMPTY;
+//         }
+//     }
+// }
+
 void Board::clearShellMarks() {
     for (auto& row : grid) {
         for (auto& cell : row) {
-            if (cell.content == CellContent::SHELL)
-                cell.content = CellContent::EMPTY;
+            cell.hasShellOverlay = false;
         }
     }
 }
