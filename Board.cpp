@@ -18,6 +18,8 @@ void Board::parseBoardFile(const std::string& filePath) {
     file.ignore();
     grid.resize(height, std::vector<Cell>(width));
 
+    file.clear();   
+    file.seekg(0, std::ios::beg); 
     std::string line;
     std::getline(file, line); // ignoring the first size defining line
     for (int y = 0; y < height && std::getline(file, line); ++y) {
