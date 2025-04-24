@@ -85,15 +85,6 @@ void Board::clearTankMarks() {
     }
 }
 
-// void Board::clearShellMarks() {
-//     for (auto& row : grid) {
-//         for (auto& cell : row) {
-//             if (cell.content == CellContent::SHELL)
-//                 cell.content = CellContent::EMPTY;
-//         }
-//     }
-// }
-
 void Board::clearShellMarks() {
     for (auto& row : grid) {
         for (auto& cell : row) {
