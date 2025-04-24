@@ -66,7 +66,7 @@ bool GameState::step(Action p1Action, Action p2Action) {
     resolveShellCollisions();
     filterRemainingShells();
     handleTankShooting(p1Action, p2Action);
-    checkGameEndConditions();
+    checkGameEndConditions(p1Action, p2Action);
 
     return gameOver;
 }
@@ -227,7 +227,7 @@ void GameState::handleTankShooting(Action p1Action, Action p2Action) {
     }
 }
 
-void GameState::checkGameEndConditions() {
+void GameState::checkGameEndConditions(Action p1Action, Action p2Action) {
     if (!tank1.isAlive() && tank2.isAlive()) {
         gameOver = true;
         gameResult = "Player 2 wins (Player 1 destroyed)";
@@ -251,6 +251,9 @@ void GameState::checkGameEndConditions() {
         logFile << "Result: " << gameResult << "\n";
         logFile.close();
     }
+    logFile << "STEP " << stepCounter++ << ":\n";
+    logFile << "P1 requested: " << static_cast<int>(p1Action) << "\n";
+    logFile << "P2 requested: " << static_cast<int>(p2Action) << "\n";
 }
 
 

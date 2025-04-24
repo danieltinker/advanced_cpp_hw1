@@ -38,7 +38,7 @@ public:
     void resolveShellCollisions();
     void filterRemainingShells();
     void handleTankShooting(Action p1Action, Action p2Action);
-    void checkGameEndConditions();
+    void checkGameEndConditions(Action p1Action, Action p2Action);
 
 private:
 
@@ -48,7 +48,7 @@ private:
     std::vector<Shell> shells;
     std::set<size_t> toRemove;
     std::map<std::pair<int, int>, std::vector<size_t>> positionMap;
-
+    int stepCounter = 0;  // Add to private section
 
     // Internal logic
     void applyAction(Tank& tank, Action action);
