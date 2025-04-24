@@ -2,12 +2,12 @@
 #include "GameState.h"
 #include "Tank.h"
 #include <iostream>
-#include "tankAlgorithm.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
 #include <string.h>
+#include "TankAlgorithm.h"
 
 
 void clear_screen() {
@@ -49,10 +49,10 @@ int main(int argc, char* argv[]) {
             auto tank1Position = game.getTank1Position();
             auto tank2Position = game.getTank2Position();
             auto tank1Direction = game.tank1.getDirection();
-            auto tank1Cooldown = game.tank1.shootCooldown;
-            Action p1 = decideTank1(board.grid, tank1Position, tank1Direction, tank1Cooldown, tank2Position);
             auto tank2Direction = game.tank2.getDirection();
+            auto tank1Cooldown = game.tank1.shootCooldown;
             auto tank2Cooldown = game.tank2.shootCooldown;
+            Action p1 = decideTank1(board.grid, tank1Position, tank1Direction, tank1Cooldown, tank2Position);
             Action p2 = decideTank2(board.grid, tank2Position, tank2Direction, tank2Cooldown, tank1Position,game.shells);
             bool over = game.step(p1, p2);
             

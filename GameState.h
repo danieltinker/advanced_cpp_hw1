@@ -1,17 +1,13 @@
-// ===============================
-// File: GameState.h
-// Interface for GameState class
-// ===============================
-
 #pragma once
 
 #include "Board.h"
 #include "Tank.h"
-#include <utility>
+#include <set>
+#include <map>
 #include <vector>
+#include <utility>
 
 using namespace std;
-
 struct Shell {
     int x, y;
     Direction dir;
@@ -32,11 +28,27 @@ public:
     std::string getResult() const;
     bool isGameOver() const;
 
+    // Modular step helpers
+    void handleTankMineCollisions();
+    void updateTankCooldowns();
+    void applyTankActions(Action p1Action, Action p2Action);
+    void confirmBackwardMoves();
+    void updateTankPositionsOnBoard();
+    void updateShellsWithOverrunCheck();
+    void resolveShellCollisions();
+    void filterRemainingShells();
+    void handleTankShooting(Action p1Action, Action p2Action);
+    void checkGameEndConditions();
+
 private:
+
     Board& board;
     Tank tank1;
     Tank tank2;
     std::vector<Shell> shells;
+    std::set<size_t> toRemove;
+    std::map<std::pair<int, int>, std::vector<size_t>> positionMap;
+
 
     // Internal logic
     void applyAction(Tank& tank, Action action);
