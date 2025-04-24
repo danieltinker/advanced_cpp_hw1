@@ -1,1 +1,1 @@
-Result: Player 1 wins (Player 2 destroyed)
+Result: Tie (Both tanks destroyed)

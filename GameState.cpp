@@ -103,6 +103,16 @@ void GameState::updateTankPositionsOnBoard() {
     board.clearTankMarks();
     auto [x1, y1] = tank1.getPosition();
     auto [x2, y2] = tank2.getPosition();
+
+    // 💥 NEW: Tank-on-tank collision
+    if (tank1.isAlive() && tank2.isAlive() &&
+    tank1.getPosition() == tank2.getPosition()) {
+    tank1.destroy();
+    tank2.destroy();
+    board.setCell(x1, y1, CellContent::EMPTY);
+    }
+
+
     if (tank1.isAlive()) board.setCell(x1, y1, CellContent::TANK1);
     if (tank2.isAlive()) board.setCell(x2, y2, CellContent::TANK2);
 }
