@@ -124,40 +124,63 @@ void GameState::updateShellsWithOverrunCheck() {
     for (size_t i = 0; i < shells.size(); ++i) {
         int dx = 0, dy = 0;
         switch (shells[i].dir) {
-            case Direction::U:  dy = -2; break;
-            case Direction::UR: dx = 2; dy = -2; break;
-            case Direction::R:  dx = 2; break;
-            case Direction::DR: dx = 2; dy = 2; break;
-            case Direction::D:  dy = 2; break;
-            case Direction::DL: dx = -2; dy = 2; break;
-            case Direction::L:  dx = -2; break;
-            case Direction::UL: dx = -2; dy = -2; break;
+            case Direction::U:  dy = -1; break;
+            case Direction::UR: dx = 1; dy = -1; break;
+            case Direction::R:  dx = 1; break;
+            case Direction::DR: dx = 1; dy = 1; break;
+            case Direction::D:  dy = 1; break;
+            case Direction::DL: dx = -1; dy = 1; break;
+            case Direction::L:  dx = -1; break;
+            case Direction::UL: dx = -1; dy = -1; break;
         }
 
-        shells[i].x += dx;
-        shells[i].y += dy;
-        board.wrapCoords(shells[i].x, shells[i].y);
+        // Move +1 step
+        shells[i].x = (shells[i].x + dx + board.getWidth()) % board.getWidth();
+        shells[i].y = (shells[i].y + dy + board.getHeight()) % board.getHeight();
 
-        int midX = shells[i].x - dx / 2;
-        int midY = shells[i].y - dy / 2;
-        board.wrapCoords(midX, midY);
-
-        if (tank1.isAlive() && midX == tank1.getPosition().first && midY == tank1.getPosition().second) {
-            tank1.destroy();
-            board.setCell(midX, midY, CellContent::EMPTY);
-            toRemove.insert(i);
-            continue;
+        if (handleShellMidStepCollision(shells[i].x, shells[i].y)) {
+            continue;  // shell destroyed at mid step
         }
-        if (tank2.isAlive() && midX == tank2.getPosition().first && midY == tank2.getPosition().second) {
-            tank2.destroy();
-            board.setCell(midX, midY, CellContent::EMPTY);
-            toRemove.insert(i);
-            continue;
+
+        // Move +1 step
+        shells[i].x = (shells[i].x + dx + board.getWidth()) % board.getWidth();
+        shells[i].y = (shells[i].y + dy + board.getHeight()) % board.getHeight();
+
+        if (handleShellMidStepCollision(shells[i].x, shells[i].y)) {
+            continue;  // shell destroyed at final step
         }
 
         positionMap[{shells[i].x, shells[i].y}].push_back(i);
     }
 }
+
+bool GameState::handleShellMidStepCollision(int x, int y) {
+    auto cell = board.getCell(x, y);
+
+    if (cell.content == CellContent::WALL) {
+        board.grid[y][x].wallHits++;
+        if (board.grid[y][x].wallHits >= 2) {
+            board.setCell(x, y, CellContent::EMPTY);
+        }
+        return true;
+    }
+
+    if (cell.content == CellContent::TANK1 && tank1.isAlive()) {
+        tank1.destroy();
+        board.setCell(x, y, CellContent::EMPTY);
+        return true;
+    }
+
+    if (cell.content == CellContent::TANK2 && tank2.isAlive()) {
+        tank2.destroy();
+        board.setCell(x, y, CellContent::EMPTY);
+        return true;
+    }
+
+    return false;
+}
+
+
 
 void GameState::resolveShellCollisions() {
     for (const auto& [pos, indices] : positionMap) {
@@ -197,7 +220,6 @@ void GameState::filterRemainingShells() {
     }
     shells = std::move(remaining);
 }
-
 void GameState::handleTankShooting(Action p1Action, Action p2Action) {
     auto spawnShell = [&](Tank& tank) {
         auto [sx, sy] = tank.getPosition();
@@ -212,8 +234,15 @@ void GameState::handleTankShooting(Action p1Action, Action p2Action) {
             case Direction::L:  dx = -1; break;
             case Direction::UL: dx = -1; dy = -1; break;
         }
-        board.wrapCoords(sx += dx, sy += dy);
-        shells.push_back({sx, sy, tank.getDirection()});
+        sx = (sx + dx + board.getWidth()) % board.getWidth();
+        sy = (sy + dy + board.getHeight()) % board.getHeight();
+
+        Shell newShell{sx, sy, tank.getDirection()};
+
+        // Immediate collision check upon spawning
+        if (!handleShellMidStepCollision(sx, sy)) {
+            shells.push_back(newShell);
+        }
     };
 
     if (p1Action == Action::SHOOT && tank1.canShoot()) {
@@ -225,6 +254,7 @@ void GameState::handleTankShooting(Action p1Action, Action p2Action) {
         spawnShell(tank2);
     }
 }
+
 
 void GameState::checkGameEndConditions(Action p1Action, Action p2Action) {
     if (!tank1.isAlive() && tank2.isAlive()) {

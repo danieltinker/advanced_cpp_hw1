@@ -39,6 +39,8 @@ public:
     void filterRemainingShells();
     void handleTankShooting(Action p1Action, Action p2Action);
     void checkGameEndConditions(Action p1Action, Action p2Action);
+    bool handleShellMidStepCollision(int x, int y);
+
 
 private:
 
