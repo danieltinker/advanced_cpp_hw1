@@ -57,7 +57,7 @@ Action rotateTowards(Direction current, Direction target)
 // A* pathfinding avoiding walls and mines
 std::vector<Position> findPath(
     const std::vector<std::vector<Cell>> &grid,
-    Position start, Position goal, CellContent otherTank)
+    Position start, Position goal)
 {
     if (!inBounds(grid, start) || !inBounds(grid, goal))
         return {};
@@ -167,8 +167,7 @@ bool hasLineOfSight(const std::vector<std::vector<Cell>> &grid,
 Action decideTank1(
     const std::vector<std::vector<Cell>> &grid,
     Position pos1, Position pos2,
-    int tank1CoolDown, Direction &facing1,
-    const std::vector<Shell> &shells)
+    int tank1CoolDown, Direction &facing1)
 {
     if (tank1CoolDown == 0 && hasLineOfSight(grid, pos1, pos2)) {
         Direction toT = directionTo(pos1, pos2);
@@ -181,7 +180,7 @@ Action decideTank1(
 
     // Recompute only (a) on the first call, (b) every 4th call, or (c) if the goal changed
     if (cachedPath.empty() || tick % 4 == 0 || cachedPath.back() != pos2) {
-        cachedPath = findPath(grid, pos1, pos2, CellContent::TANK2);
+        cachedPath = findPath(grid, pos1, pos2);
         tick = 0;                            // restart the counter after a fresh path
     }
     ++tick;
@@ -212,7 +211,7 @@ Action decideTank1(
 
 Action decideTank2(
     const std::vector<std::vector<Cell>> &grid,
-    Position pos2, Position pos1, int tank2CoolDown, Direction &facing2,
+    Position pos2, Position pos1, Direction &facing2,
     const std::vector<Shell> &shells)
 {
 

@@ -51,19 +51,17 @@ int main(int argc, char* argv[]) {
             auto tank1Direction = game.tank1.getDirection();
             auto tank2Direction = game.tank2.getDirection();
             auto tank1Cooldown = game.tank1.shootCooldown;
-            auto tank2Cooldown = game.tank2.shootCooldown;
 
             std::string msg;
-            Action p1 = decideTank1(board.grid, tank1Position, tank2Position, tank1Cooldown, tank1Direction, game.shells);
-            Action p2 = decideTank2(board.grid, tank2Position, tank1Position, tank2Cooldown, tank2Direction,game.shells);
-            bool over = game.step(p1, p2);
+            Action p1 = decideTank1(board.grid, tank1Position, tank2Position, tank1Cooldown, tank1Direction);
+            Action p2 = decideTank2(board.grid, tank2Position, tank1Position, tank2Direction,game.shells);
+            game.step(p1, p2);
             
             tank1Position = game.getTank1Position();
             tank2Position = game.getTank2Position();
             tank1Direction = game.tank1.getDirection();
             tank2Direction = game.tank2.getDirection();
             tank1Cooldown = game.tank1.shootCooldown;
-            tank2Cooldown = game.tank2.shootCooldown;
 
             s += " Just Taken actions: " + toString(p1) + " " + toString(p2) + "\n";
             s += "newTanks1pos:" + std::to_string(tank1Position.first) + " " + std::to_string(tank1Position.second) + "\n";
@@ -77,7 +75,7 @@ int main(int argc, char* argv[]) {
             i++;
         }
     
-        int index = 0;
+        size_t index = 0;
     
         while (1) {
             clear_screen();
