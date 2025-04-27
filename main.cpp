@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
             auto tank2Cooldown = game.tank2.shootCooldown;
 
             std::string msg;
-            Action p1 = decideTank1(board.grid, tank1Position, tank2Position, tank1Cooldown, tank1Direction, game.shells,&msg);
+            Action p1 = decideTank1(board.grid, tank1Position, tank2Position, tank1Cooldown, tank1Direction, game.shells);
             Action p2 = decideTank2(board.grid, tank2Position, tank1Position, tank2Cooldown, tank2Direction,game.shells);
             bool over = game.step(p1, p2);
             

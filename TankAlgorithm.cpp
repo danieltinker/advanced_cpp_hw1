@@ -163,38 +163,52 @@ bool hasLineOfSight(const std::vector<std::vector<Cell>> &grid,
     return false; // no matching direction found
 }
 
+
 Action decideTank1(
     const std::vector<std::vector<Cell>> &grid,
-    Position pos1, Position pos2, int tank1CoolDown, Direction &facing1,
-    const std::vector<Shell> &shells, std::string *msg)
+    Position pos1, Position pos2,
+    int tank1CoolDown, Direction &facing1,
+    const std::vector<Shell> &shells)
 {
-
-    *msg += "Tank1LOF:" + std::string(hasLineOfSight(grid, pos1, pos2) ? "true" : "false") + "\n";
-    if (tank1CoolDown == 0 && hasLineOfSight(grid, pos1, pos2))
-    {
-        *msg += "has lof";
+    if (tank1CoolDown == 0 && hasLineOfSight(grid, pos1, pos2)) {
         Direction toT = directionTo(pos1, pos2);
-        *msg += "toT" + toString(toT);
-        if (facing1 == toT)
-        {
-            return Action::SHOOT;
-        }
-        return rotateTowards(facing1, toT);
+        if (facing1 == toT)       return Action::SHOOT;
+        else                      return rotateTowards(facing1, toT);
     }
-    auto path = findPath(grid, pos1, pos2, CellContent::TANK2);
-    if (path.size() >= 2)
-    {
-        Position next = path[1];
+
+    static std::vector<Position> cachedPath;
+    static int tick = 0;                     // counts calls to this function
+
+    // Recompute only (a) on the first call, (b) every 4th call, or (c) if the goal changed
+    if (cachedPath.empty() || tick % 4 == 0 || cachedPath.back() != pos2) {
+        cachedPath = findPath(grid, pos1, pos2, CellContent::TANK2);
+        tick = 0;                            // restart the counter after a fresh path
+    }
+    ++tick;
+
+    /* remove already-visited nodes so that cachedPath[0] == pos1 */
+    while (!cachedPath.empty() && cachedPath.front() == pos1)
+        cachedPath.erase(cachedPath.begin());
+
+    if (cachedPath.size() >= 1) {            // ≥1 because we just stripped pos1
+        Position next = cachedPath.front(); 
         Direction want = directionTo(pos1, next);
+
         if (facing1 != want)
             return rotateTowards(facing1, want);
-        return (pos1.first + dirOffsets[static_cast<int>(facing1)].first == pos2.first &&
-        pos1.second + dirOffsets[static_cast<int>(facing1)].second == pos2.second)
-           ? Action::NONE
-           : Action::MOVE_FORWARD;
+
+        /* if the cell immediately ahead already holds Tank 2, stop */
+        bool willCollide =
+            pos1.first  + dirOffsets[static_cast<int>(facing1)].first  == pos2.first &&
+            pos1.second + dirOffsets[static_cast<int>(facing1)].second == pos2.second;
+
+        return willCollide ? Action::NONE : Action::MOVE_FORWARD;
     }
+
+    /* --------------- nowhere to go ------------------------ */
     return Action::NONE;
 }
+
 
 Action decideTank2(
     const std::vector<std::vector<Cell>> &grid,
@@ -254,3 +268,4 @@ Action decideTank2(
 
     return Action::NONE;
 }
+
