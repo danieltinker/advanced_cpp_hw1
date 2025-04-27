@@ -56,10 +56,10 @@ void GameState::applyAction(Tank& tank, Action action) {
 
 bool GameState::step(Action p1Action, Action p2Action) {
     if (gameOver) return true;
+    applyTankActions(p1Action, p2Action);
 
     handleTankMineCollisions();
     updateTankCooldowns();
-    applyTankActions(p1Action, p2Action);
     confirmBackwardMoves();
     updateTankPositionsOnBoard();
     updateShellsWithOverrunCheck();
@@ -104,7 +104,6 @@ void GameState::updateTankPositionsOnBoard() {
     auto [x1, y1] = tank1.getPosition();
     auto [x2, y2] = tank2.getPosition();
 
-    // 💥 NEW: Tank-on-tank collision
     if (tank1.isAlive() && tank2.isAlive() &&
     tank1.getPosition() == tank2.getPosition()) {
     tank1.destroy();

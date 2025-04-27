@@ -6,17 +6,589 @@ P1 requested: 3
 P2 requested: 3
 STEP 2:
 P1 requested: 3
-P2 requested: 7
+P2 requested: 0
 STEP 3:
-P1 requested: 6
-P2 requested: 7
+P1 requested: 0
+P2 requested: 3
 STEP 4:
-P1 requested: 7
+P1 requested: 0
 P2 requested: 7
 STEP 5:
-P1 requested: 7
-P2 requested: 2
+P1 requested: 0
+P2 requested: 7
 STEP 6:
-P1 requested: 7
+P1 requested: 0
+P2 requested: 7
+STEP 7:
+P1 requested: 0
+P2 requested: 7
+STEP 8:
+P1 requested: 0
+P2 requested: 7
+STEP 9:
+P1 requested: 0
+P2 requested: 7
+STEP 10:
+P1 requested: 0
+P2 requested: 7
+STEP 11:
+P1 requested: 0
+P2 requested: 7
+STEP 12:
+P1 requested: 0
+P2 requested: 7
+STEP 13:
+P1 requested: 3
+P2 requested: 7
+STEP 14:
+P1 requested: 0
+P2 requested: 7
+STEP 15:
+P1 requested: 2
 P2 requested: 2
-Result: Player 1 wins (Player 2 destroyed)
+STEP 16:
+P1 requested: 6
+P2 requested: 0
+STEP 17:
+P1 requested: 3
+P2 requested: 3
+STEP 18:
+P1 requested: 7
+P2 requested: 0
+STEP 19:
+P1 requested: 0
+P2 requested: 3
+STEP 20:
+P1 requested: 3
+P2 requested: 3
+STEP 21:
+P1 requested: 3
+P2 requested: 0
+STEP 22:
+P1 requested: 3
+P2 requested: 3
+STEP 23:
+P1 requested: 6
+P2 requested: 0
+STEP 24:
+P1 requested: 3
+P2 requested: 3
+STEP 25:
+P1 requested: 0
+P2 requested: 0
+STEP 26:
+P1 requested: 3
+P2 requested: 3
+STEP 27:
+P1 requested: 7
+P2 requested: 0
+STEP 28:
+P1 requested: 3
+P2 requested: 3
+STEP 29:
+P1 requested: 6
+P2 requested: 7
+STEP 30:
+P1 requested: 7
+P2 requested: 7
+STEP 31:
+P1 requested: 7
+P2 requested: 7
+STEP 32:
+P1 requested: 7
+P2 requested: 7
+STEP 33:
+P1 requested: 7
+P2 requested: 7
+STEP 34:
+P1 requested: 6
+P2 requested: 7
+STEP 35:
+P1 requested: 7
+P2 requested: 7
+STEP 36:
+P1 requested: 7
+P2 requested: 7
+STEP 37:
+P1 requested: 7
+P2 requested: 7
+STEP 38:
+P1 requested: 7
+P2 requested: 7
+STEP 39:
+P1 requested: 6
+P2 requested: 7
+STEP 40:
+P1 requested: 7
+P2 requested: 7
+STEP 41:
+P1 requested: 7
+P2 requested: 7
+STEP 42:
+P1 requested: 7
+P2 requested: 7
+STEP 43:
+P1 requested: 7
+P2 requested: 7
+STEP 44:
+P1 requested: 6
+P2 requested: 7
+STEP 45:
+P1 requested: 7
+P2 requested: 7
+STEP 46:
+P1 requested: 7
+P2 requested: 7
+STEP 47:
+P1 requested: 7
+P2 requested: 7
+STEP 48:
+P1 requested: 7
+P2 requested: 7
+STEP 49:
+P1 requested: 6
+P2 requested: 7
+STEP 50:
+P1 requested: 7
+P2 requested: 7
+STEP 51:
+P1 requested: 7
+P2 requested: 7
+STEP 52:
+P1 requested: 7
+P2 requested: 7
+STEP 53:
+P1 requested: 7
+P2 requested: 7
+STEP 54:
+P1 requested: 6
+P2 requested: 7
+STEP 55:
+P1 requested: 7
+P2 requested: 7
+STEP 56:
+P1 requested: 7
+P2 requested: 7
+STEP 57:
+P1 requested: 7
+P2 requested: 7
+STEP 58:
+P1 requested: 7
+P2 requested: 7
+STEP 59:
+P1 requested: 6
+P2 requested: 7
+STEP 60:
+P1 requested: 7
+P2 requested: 7
+STEP 61:
+P1 requested: 7
+P2 requested: 7
+STEP 62:
+P1 requested: 7
+P2 requested: 7
+STEP 63:
+P1 requested: 7
+P2 requested: 7
+STEP 64:
+P1 requested: 6
+P2 requested: 7
+STEP 65:
+P1 requested: 7
+P2 requested: 7
+STEP 66:
+P1 requested: 7
+P2 requested: 7
+STEP 67:
+P1 requested: 7
+P2 requested: 7
+STEP 68:
+P1 requested: 7
+P2 requested: 7
+STEP 69:
+P1 requested: 6
+P2 requested: 7
+STEP 70:
+P1 requested: 7
+P2 requested: 7
+STEP 71:
+P1 requested: 7
+P2 requested: 7
+STEP 72:
+P1 requested: 7
+P2 requested: 7
+STEP 73:
+P1 requested: 7
+P2 requested: 7
+STEP 74:
+P1 requested: 6
+P2 requested: 7
+STEP 75:
+P1 requested: 7
+P2 requested: 7
+STEP 76:
+P1 requested: 7
+P2 requested: 7
+STEP 77:
+P1 requested: 7
+P2 requested: 7
+STEP 78:
+P1 requested: 7
+P2 requested: 7
+STEP 79:
+P1 requested: 6
+P2 requested: 7
+STEP 80:
+P1 requested: 7
+P2 requested: 7
+STEP 81:
+P1 requested: 7
+P2 requested: 7
+STEP 82:
+P1 requested: 7
+P2 requested: 7
+STEP 83:
+P1 requested: 7
+P2 requested: 7
+STEP 84:
+P1 requested: 6
+P2 requested: 7
+STEP 85:
+P1 requested: 7
+P2 requested: 7
+STEP 86:
+P1 requested: 7
+P2 requested: 7
+STEP 87:
+P1 requested: 7
+P2 requested: 7
+STEP 88:
+P1 requested: 7
+P2 requested: 7
+STEP 89:
+P1 requested: 6
+P2 requested: 7
+STEP 90:
+P1 requested: 7
+P2 requested: 7
+STEP 91:
+P1 requested: 7
+P2 requested: 7
+STEP 92:
+P1 requested: 7
+P2 requested: 7
+STEP 93:
+P1 requested: 7
+P2 requested: 7
+STEP 94:
+P1 requested: 6
+P2 requested: 7
+STEP 95:
+P1 requested: 7
+P2 requested: 7
+STEP 96:
+P1 requested: 7
+P2 requested: 7
+STEP 97:
+P1 requested: 7
+P2 requested: 7
+STEP 98:
+P1 requested: 7
+P2 requested: 7
+STEP 99:
+P1 requested: 6
+P2 requested: 7
+STEP 100:
+P1 requested: 6
+P2 requested: 7
+STEP 101:
+P1 requested: 6
+P2 requested: 7
+STEP 102:
+P1 requested: 6
+P2 requested: 7
+STEP 103:
+P1 requested: 6
+P2 requested: 7
+STEP 104:
+P1 requested: 6
+P2 requested: 7
+STEP 105:
+P1 requested: 6
+P2 requested: 7
+STEP 106:
+P1 requested: 6
+P2 requested: 7
+STEP 107:
+P1 requested: 6
+P2 requested: 7
+STEP 108:
+P1 requested: 6
+P2 requested: 7
+STEP 109:
+P1 requested: 6
+P2 requested: 7
+STEP 110:
+P1 requested: 6
+P2 requested: 7
+STEP 111:
+P1 requested: 6
+P2 requested: 7
+STEP 112:
+P1 requested: 6
+P2 requested: 7
+STEP 113:
+P1 requested: 6
+P2 requested: 7
+STEP 114:
+P1 requested: 6
+P2 requested: 7
+STEP 115:
+P1 requested: 6
+P2 requested: 7
+STEP 116:
+P1 requested: 6
+P2 requested: 7
+STEP 117:
+P1 requested: 6
+P2 requested: 7
+STEP 118:
+P1 requested: 6
+P2 requested: 7
+STEP 119:
+P1 requested: 6
+P2 requested: 7
+STEP 120:
+P1 requested: 6
+P2 requested: 7
+STEP 121:
+P1 requested: 6
+P2 requested: 7
+STEP 122:
+P1 requested: 6
+P2 requested: 7
+STEP 123:
+P1 requested: 6
+P2 requested: 7
+STEP 124:
+P1 requested: 6
+P2 requested: 7
+STEP 125:
+P1 requested: 6
+P2 requested: 7
+STEP 126:
+P1 requested: 6
+P2 requested: 7
+STEP 127:
+P1 requested: 6
+P2 requested: 7
+STEP 128:
+P1 requested: 6
+P2 requested: 7
+STEP 129:
+P1 requested: 6
+P2 requested: 7
+STEP 130:
+P1 requested: 6
+P2 requested: 7
+STEP 131:
+P1 requested: 6
+P2 requested: 7
+STEP 132:
+P1 requested: 6
+P2 requested: 7
+STEP 133:
+P1 requested: 6
+P2 requested: 7
+STEP 134:
+P1 requested: 6
+P2 requested: 7
+STEP 135:
+P1 requested: 6
+P2 requested: 7
+STEP 136:
+P1 requested: 6
+P2 requested: 7
+STEP 137:
+P1 requested: 6
+P2 requested: 7
+STEP 138:
+P1 requested: 6
+P2 requested: 7
+STEP 139:
+P1 requested: 6
+P2 requested: 7
+STEP 140:
+P1 requested: 6
+P2 requested: 7
+STEP 141:
+P1 requested: 6
+P2 requested: 7
+STEP 142:
+P1 requested: 6
+P2 requested: 7
+STEP 143:
+P1 requested: 6
+P2 requested: 7
+STEP 144:
+P1 requested: 6
+P2 requested: 7
+STEP 145:
+P1 requested: 6
+P2 requested: 7
+STEP 146:
+P1 requested: 6
+P2 requested: 7
+STEP 147:
+P1 requested: 6
+P2 requested: 7
+STEP 148:
+P1 requested: 6
+P2 requested: 7
+STEP 149:
+P1 requested: 6
+P2 requested: 7
+STEP 150:
+P1 requested: 6
+P2 requested: 7
+STEP 151:
+P1 requested: 6
+P2 requested: 7
+STEP 152:
+P1 requested: 6
+P2 requested: 7
+STEP 153:
+P1 requested: 6
+P2 requested: 7
+STEP 154:
+P1 requested: 6
+P2 requested: 7
+STEP 155:
+P1 requested: 6
+P2 requested: 7
+STEP 156:
+P1 requested: 6
+P2 requested: 7
+STEP 157:
+P1 requested: 6
+P2 requested: 7
+STEP 158:
+P1 requested: 6
+P2 requested: 7
+STEP 159:
+P1 requested: 6
+P2 requested: 7
+STEP 160:
+P1 requested: 6
+P2 requested: 7
+STEP 161:
+P1 requested: 6
+P2 requested: 7
+STEP 162:
+P1 requested: 6
+P2 requested: 7
+STEP 163:
+P1 requested: 6
+P2 requested: 7
+STEP 164:
+P1 requested: 6
+P2 requested: 7
+STEP 165:
+P1 requested: 6
+P2 requested: 7
+STEP 166:
+P1 requested: 6
+P2 requested: 7
+STEP 167:
+P1 requested: 6
+P2 requested: 7
+STEP 168:
+P1 requested: 6
+P2 requested: 7
+STEP 169:
+P1 requested: 6
+P2 requested: 7
+STEP 170:
+P1 requested: 6
+P2 requested: 7
+STEP 171:
+P1 requested: 6
+P2 requested: 7
+STEP 172:
+P1 requested: 6
+P2 requested: 7
+STEP 173:
+P1 requested: 6
+P2 requested: 7
+STEP 174:
+P1 requested: 6
+P2 requested: 7
+STEP 175:
+P1 requested: 6
+P2 requested: 7
+STEP 176:
+P1 requested: 6
+P2 requested: 7
+STEP 177:
+P1 requested: 6
+P2 requested: 7
+STEP 178:
+P1 requested: 6
+P2 requested: 7
+STEP 179:
+P1 requested: 6
+P2 requested: 7
+STEP 180:
+P1 requested: 6
+P2 requested: 7
+STEP 181:
+P1 requested: 6
+P2 requested: 7
+STEP 182:
+P1 requested: 6
+P2 requested: 7
+STEP 183:
+P1 requested: 6
+P2 requested: 7
+STEP 184:
+P1 requested: 6
+P2 requested: 7
+STEP 185:
+P1 requested: 6
+P2 requested: 7
+STEP 186:
+P1 requested: 6
+P2 requested: 7
+STEP 187:
+P1 requested: 6
+P2 requested: 7
+STEP 188:
+P1 requested: 6
+P2 requested: 7
+STEP 189:
+P1 requested: 6
+P2 requested: 7
+STEP 190:
+P1 requested: 6
+P2 requested: 7
+STEP 191:
+P1 requested: 6
+P2 requested: 7
+STEP 192:
+P1 requested: 6
+P2 requested: 7
+STEP 193:
+P1 requested: 6
+P2 requested: 7
+STEP 194:
+P1 requested: 6
+P2 requested: 7
+STEP 195:
+P1 requested: 6
+P2 requested: 7
+STEP 196:
+P1 requested: 6
+P2 requested: 7
+STEP 197:
+P1 requested: 6
+P2 requested: 

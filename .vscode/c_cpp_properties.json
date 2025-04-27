@@ -3,7 +3,9 @@
     {
       "name": "macos-clang-x64",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/**",
+        "C:/Users/evyat/Documents/School/TAU2024-2025/cpp/advanced_cpp_hw1"
+
       ],
       "compilerPath": "/usr/bin/clang",
       "cStandard": "${default}",

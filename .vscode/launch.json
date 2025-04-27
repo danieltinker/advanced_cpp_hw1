@@ -1,13 +1,31 @@
+
+
 {
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
+      "name": "Debug in WSL",
+      "type": "cppdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/main.cpp",
       "args": [],
-      "cwd": "/Users/danielbaruch/Documents/Git/advanced_cpp_hw1",
-      "program": "/Users/danielbaruch/Documents/Git/advanced_cpp_hw1/build/Debug/outDebug"
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
+    // {
+    //   "type": "lldb",
+    //   "program": "/Users/danielbaruch/Documents/Git/advanced_cpp_hw1/build/Debug/outDebug"
+    // }
   ]
 }

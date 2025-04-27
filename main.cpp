@@ -52,11 +52,25 @@ int main(int argc, char* argv[]) {
             auto tank2Direction = game.tank2.getDirection();
             auto tank1Cooldown = game.tank1.shootCooldown;
             auto tank2Cooldown = game.tank2.shootCooldown;
-            Action p1 = decideTank1(board.grid, tank1Position, tank1Direction, tank1Cooldown, tank2Position);
-            Action p2 = decideTank2(board.grid, tank2Position, tank2Direction, tank2Cooldown, tank1Position,game.shells);
+
+            std::string msg;
+            Action p1 = decideTank1(board.grid, tank1Position, tank2Position, tank1Cooldown, tank1Direction, game.shells,&msg);
+            Action p2 = decideTank2(board.grid, tank2Position, tank1Position, tank2Cooldown, tank2Direction,game.shells);
             bool over = game.step(p1, p2);
             
-            s += "Taken actions: " + toString(p1) + " " + toString(p2) + "\n";
+            tank1Position = game.getTank1Position();
+            tank2Position = game.getTank2Position();
+            tank1Direction = game.tank1.getDirection();
+            tank2Direction = game.tank2.getDirection();
+            tank1Cooldown = game.tank1.shootCooldown;
+            tank2Cooldown = game.tank2.shootCooldown;
+
+            s += " Just Taken actions: " + toString(p1) + " " + toString(p2) + "\n";
+            s += "newTanks1pos:" + std::to_string(tank1Position.first) + " " + std::to_string(tank1Position.second) + "\n";
+            s += "Tanks2pos:" + std::to_string(tank2Position.first) + " " + std::to_string(tank2Position.second) + "\n";
+            s += "Tank1cooldown:" + std::to_string(tank1Cooldown) + "\n";
+            s += "Tank1LOF:" + std::string(hasLineOfSight(board.grid, tank1Position, tank2Position) ? "true" : "false") + "\n";
+
             s +=game.render();
             moves.push_back(s);
             cout << "Turn "  << i << " complete\n";
