@@ -8,7 +8,6 @@
 
 
 using namespace std;
-// --- Global Game State Flags ---
 int emptyAmmoSteps = 0;
 bool gameOver = false;
 std::string gameResult;
@@ -134,23 +133,45 @@ void GameState::updateShellsWithOverrunCheck() {
             case Direction::UL: dx = -1; dy = -1; break;
         }
 
-        // Move +1 step
-        shells[i].x = (shells[i].x + dx + board.getWidth()) % board.getWidth();
-        shells[i].y = (shells[i].y + dy + board.getHeight()) % board.getHeight();
+        for (int step = 0; step < 2; ++step) { // move twice per turn
+            int nextX = shells[i].x + dx;
+            int nextY = shells[i].y + dy;
 
-        if (handleShellMidStepCollision(shells[i].x, shells[i].y)) {
-            continue;  // shell destroyed at mid step
+            bool wrapped = false;
+
+            if (nextX < 0 || nextX >= board.getWidth() || nextY < 0 || nextY >= board.getHeight()) {
+                int wrapX = (nextX + board.getWidth()) % board.getWidth();
+                int wrapY = (nextY + board.getHeight()) % board.getHeight();
+                auto borderCell = board.getCell(wrapX, wrapY);
+
+                if (borderCell.content == CellContent::WALL) {
+                    // Hit border wall: Damage it and destroy shell
+                    board.grid[wrapY][wrapX].wallHits++;
+                    if (board.grid[wrapY][wrapX].wallHits >= 2) {
+                        board.setCell(wrapX, wrapY, CellContent::EMPTY);
+                    }
+                    toRemove.insert(i);
+                    break; // shell destroyed
+                } else {
+                    // Wall already broken -> allow wrapping
+                    nextX = wrapX;
+                    nextY = wrapY;
+                    wrapped = true;
+                }
+            }
+
+            shells[i].x = nextX;
+            shells[i].y = nextY;
+
+            if (handleShellMidStepCollision(shells[i].x, shells[i].y)) {
+                toRemove.insert(i);
+                break; // shell destroyed
+            }
+
+            if (!wrapped) {
+                positionMap[{shells[i].x, shells[i].y}].push_back(i);
+            }
         }
-
-        // Move +1 step
-        shells[i].x = (shells[i].x + dx + board.getWidth()) % board.getWidth();
-        shells[i].y = (shells[i].y + dy + board.getHeight()) % board.getHeight();
-
-        if (handleShellMidStepCollision(shells[i].x, shells[i].y)) {
-            continue;  // shell destroyed at final step
-        }
-
-        positionMap[{shells[i].x, shells[i].y}].push_back(i);
     }
 }
 
@@ -162,7 +183,7 @@ bool GameState::handleShellMidStepCollision(int x, int y) {
         if (board.grid[y][x].wallHits >= 2) {
             board.setCell(x, y, CellContent::EMPTY);
         }
-        return true;
+        return true; // Shell is destroyed upon hitting a wall
     }
 
     if (cell.content == CellContent::TANK1 && tank1.isAlive()) {
@@ -179,6 +200,7 @@ bool GameState::handleShellMidStepCollision(int x, int y) {
 
     return false;
 }
+
 
 
 
@@ -234,14 +256,13 @@ void GameState::handleTankShooting(Action p1Action, Action p2Action) {
             case Direction::L:  dx = -1; break;
             case Direction::UL: dx = -1; dy = -1; break;
         }
-        sx = (sx + dx + board.getWidth()) % board.getWidth();
-        sy = (sy + dy + board.getHeight()) % board.getHeight();
 
-        Shell newShell{sx, sy, tank.getDirection()};
+        int spawnX = (sx + dx + board.getWidth()) % board.getWidth();
+        int spawnY = (sy + dy + board.getHeight()) % board.getHeight();
 
         // Immediate collision check upon spawning
-        if (!handleShellMidStepCollision(sx, sy)) {
-            shells.push_back(newShell);
+        if (!handleShellMidStepCollision(spawnX, spawnY)) {
+            shells.push_back({spawnX, spawnY, tank.getDirection()});
         }
     };
 

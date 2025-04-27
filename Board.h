@@ -12,19 +12,15 @@ enum class CellContent {
     SHELL
 };
 
-// struct Cell {
-//     CellContent content = CellContent::EMPTY;
-//     int wallHits = 0;
-// };
 struct Cell {
     CellContent content = CellContent::EMPTY;
     int wallHits = 0;
-    bool hasShellOverlay = false;  // NEW: tracks if a shell passed here
+    bool hasShellOverlay = false;  
 };
 
 class Board {
 public:
-    friend int main(int argc, char* argv[]); // TODO remove
+    friend int main(int argc, char* argv[]);
     
     Board(const std::string& filePath);
     std::string print(Direction dir1,Direction dir2) const;

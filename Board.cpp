@@ -21,7 +21,7 @@ void Board::parseBoardFile(const std::string& filePath) {
     if (!(file >> tempWidth >> tempHeight)) {
         throw std::runtime_error("Invalid width/height declaration in board file.");
     }
-    file.ignore();  // Ignore the rest of the line
+    file.ignore();
 
     width = tempWidth;
     height = tempHeight;
@@ -117,7 +117,7 @@ std::string Board::print(Direction dir1,Direction dir2) const {
             switch (cell.content) {
                 case CellContent::WALL:  c = "■"; break;
                 case CellContent::MINE:  c = '@'; break;
-                case CellContent::TANK1: c = "\033[31m"+toString(dir1)+"\033[0m"; break; // TODO need to use the actual dir once tanks are held in board and not state
+                case CellContent::TANK1: c = "\033[31m"+toString(dir1)+"\033[0m"; break; 
                 case CellContent::TANK2: c = "\033[34m"+toString(dir2)+"\033[0m";  break;
                 case CellContent::SHELL: c = "⋅"; break;
                 case CellContent::EMPTY: c = "_"; break;

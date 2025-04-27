@@ -6,10 +6,10 @@ P1 requested: 3
 P2 requested: 3
 STEP 2:
 P1 requested: 3
-P2 requested: 0
+P2 requested: 7
 STEP 3:
-P1 requested: 0
-P2 requested: 3
+P1 requested: 6
+P2 requested: 7
 STEP 4:
 P1 requested: 0
 P2 requested: 7
@@ -21,53 +21,8 @@ P1 requested: 0
 P2 requested: 7
 STEP 7:
 P1 requested: 0
-P2 requested: 7
+P2 requested: 3
 STEP 8:
-P1 requested: 0
-P2 requested: 7
-STEP 9:
-P1 requested: 0
-P2 requested: 7
-STEP 10:
-P1 requested: 0
-P2 requested: 7
-STEP 11:
-P1 requested: 0
-P2 requested: 7
-STEP 12:
-P1 requested: 0
-P2 requested: 7
-STEP 13:
-P1 requested: 3
-P2 requested: 7
-STEP 14:
-P1 requested: 0
-P2 requested: 7
-STEP 15:
-P1 requested: 2
+P1 requested: 6
 P2 requested: 2
-STEP 16:
-P1 requested: 6
-P2 requested: 0
-STEP 17:
-P1 requested: 3
-P2 requested: 3
-STEP 18:
-P1 requested: 7
-P2 requested: 0
-STEP 19:
-P1 requested: 0
-P2 requested: 3
-STEP 20:
-P1 requested: 3
-P2 requested: 3
-STEP 21:
-P1 requested: 3
-P2 requested: 0
-STEP 22:
-P1 requested: 3
-P2 requested: 3
-STEP 23:
-P1 requested: 6
-P2 requested: 0
 Result: Player 1 wins (Player 2 destroyed)
