@@ -49,13 +49,18 @@ Symbol	Meaning
 2	Player 2's tank (starts facing Right)
 Empty space
 
-📝 Game Logging (outputs):
-Into a file called game_output.txt:
+
+
+📝 Game Logging (Outputs):
+
+Output written to output_<inputfile>.txt:
 - All requested actions (even invalid ones)
 - Step-by-step game state
 - Final game result (win/tie)
-Into a file called input_errors:
--  Parsing Warnings (extra tanks, missing rows or extra rows, unknown characters)
+
+Input Errors Log:
+-  If input file has recoverable errors (e.g. extra tanks, wrong dimensions, unknown symbols),
+details are written into input_errors.txt (only if errors exist).
 
 🎯 Game Rules:
 - Tanks can move forward, rotate, shoot, or move backward (with delay).
