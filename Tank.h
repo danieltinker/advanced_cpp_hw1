@@ -21,7 +21,7 @@ enum class Action {
 
 
 class Tank {
-    friend int main(int argc, char* argv[]); // TODO remove
+    friend int main(int argc, char* argv[]); 
 public:
     Tank(int playerId, int x, int y, Direction dir);
 

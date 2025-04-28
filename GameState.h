@@ -16,12 +16,10 @@ struct Shell {
 };
 
 class GameState {
-    friend int main(int argc, char* argv[]); // TODO remove
+    friend int main(int argc, char* argv[]); 
     public:
-    // GameState(Board& board);
-    GameState(Board& board, const std::string& inputFilename);  // updated
+    GameState(Board& board, const std::string& inputFilename); 
 
-    // Primary step update function
     bool step(Action p1Action, Action p2Action);
     std::string render() const;
 
@@ -46,14 +44,13 @@ class GameState {
 
 
 private:
-
     Board& board;
     Tank tank1;
     Tank tank2;
     std::vector<Shell> shells;
     std::set<size_t> toRemove;
     std::map<std::pair<int, int>, std::vector<size_t>> positionMap;
-    int stepCounter = 0;  // Add to private section
+    int stepCounter = 0; 
     // Internal logic
     void applyAction(Tank& tank, Action action);
     std::pair<int, int> findTank(CellContent tankSymbol);
