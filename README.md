@@ -12,6 +12,7 @@ GameState.h        GameState.cpp	Controls the game rules, turns, and collisions
 TankAlgorithm.h    TankAlgorithm.cpp	Algorithms for tank decision making (chase/reactive)
 CMakeLists.txt     Build configuration
 
+
 🛠️ How to Build
 This project uses CMake for easy compilation.
 
@@ -23,12 +24,11 @@ cd build
 cmake ..
 make
 
-
 After building, you'll have an executable called:
 ./tank_game
 
 
-🎮 How to Run
+🎮 How to Run (inputs)
 ./tank_game board.txt
 Where board.txt is a text file representing the initial state of the game board.
 
@@ -49,32 +49,25 @@ Symbol	Meaning
 2	Player 2's tank (starts facing Right)
 Empty space
 
+📝 Game Logging (outputs):
+Into a file called game_output.txt:
+- All requested actions (even invalid ones)
+- Step-by-step game state
+- Final game result (win/tie)
+Into a file called input_errors:
+-  Parsing Warnings (extra tanks, missing rows or extra rows, unknown characters)
 
-🎯 Game Rules (Highlights)
-Tanks can move forward, rotate, shoot, or move backward (with delay).
+🎯 Game Rules:
+- Tanks can move forward, rotate, shoot, or move backward (with delay).
+- Shells move twice as fast as tanks.
+- Stepping on a mine destroys a tank instantly.
+- If tanks collide with each other, both are destroyed.
+- If both tanks run out of ammo and 40 more turns pass, the game ends in a tie.
 
-Shells move twice as fast as tanks.
-
-Stepping on a mine destroys a tank instantly.
-
-If tanks collide with each other, both are destroyed.
-
-If both tanks run out of ammo and 40 more turns pass, the game ends in a tie.
-
-📝 Logging
-The game logs:
-
-All requested actions (even invalid ones)
-
-Step-by-step game state
-
-Final game result (win/tie)
-
-into a file called game_output.txt.
 
 👨‍💻 Contributors
-Daniel Baruch
-Evyatar Oren
+Daniel Baruch 315634022
+Evyatar Oren 331684530
 
 
 

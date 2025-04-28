@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     try {
         Board board(argv[1]);
-        GameState game(board);
+        GameState game(board, argv[1]);
         board.print(game.tank1.getDirection(), game.tank2.getDirection());
         std::vector<std::string> moves;
 

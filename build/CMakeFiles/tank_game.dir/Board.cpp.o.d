@@ -266,8 +266,6 @@ CMakeFiles/tank_game.dir/Board.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/cstring \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/string.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/string.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_rsize_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_errno_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_ssize_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/strings.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__algorithm/equal.h \
@@ -721,6 +719,8 @@ CMakeFiles/tank_game.dir/Board.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_nlink_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_useconds_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_suseconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_rsize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_errno_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_fd_def.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_fd_setsize.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_fd_set.h \

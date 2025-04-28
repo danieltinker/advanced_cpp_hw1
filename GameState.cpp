@@ -11,14 +11,18 @@ using namespace std;
 int emptyAmmoSteps = 0;
 bool gameOver = false;
 std::string gameResult;
-std::ofstream logFile("game_output.txt");
-
-
-GameState::GameState(Board& board): board(board),
-      tank1([&] { auto [x1, y1] = findTank(CellContent::TANK1); return Tank(1, x1, y1, Direction::L); }()),
-      tank2([&] { auto [x2, y2] = findTank(CellContent::TANK2); return Tank(2, x2, y2, Direction::R); }()) {}
-
-
+GameState::GameState(Board& board, const std::string& inputFilename)
+      : board(board),
+        tank1([&] { auto [x1, y1] = findTank(CellContent::TANK1); return Tank(1, x1, y1, Direction::L); }()),
+        tank2([&] { auto [x2, y2] = findTank(CellContent::TANK2); return Tank(2, x2, y2, Direction::R); }()) 
+  {
+      std::string outputFilename = "output_" + inputFilename;
+      logFile.open(outputFilename);
+      if (!logFile.is_open()) {
+          throw std::runtime_error("Failed to open output file: " + outputFilename);
+      }
+  }
+  
 
 
 

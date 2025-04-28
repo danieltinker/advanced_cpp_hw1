@@ -11,18 +11,12 @@ STEP 3:
 P1 requested: 6
 P2 requested: 7
 STEP 4:
-P1 requested: 0
+P1 requested: 7
 P2 requested: 7
 STEP 5:
-P1 requested: 0
-P2 requested: 7
+P1 requested: 7
+P2 requested: 2
 STEP 6:
-P1 requested: 0
-P2 requested: 7
-STEP 7:
-P1 requested: 0
-P2 requested: 3
-STEP 8:
-P1 requested: 6
+P1 requested: 7
 P2 requested: 2
 Result: Player 1 wins (Player 2 destroyed)

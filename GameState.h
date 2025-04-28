@@ -6,6 +6,8 @@
 #include <map>
 #include <vector>
 #include <utility>
+#include <fstream> // for std::ofstream
+
 
 using namespace std;
 struct Shell {
@@ -15,8 +17,9 @@ struct Shell {
 
 class GameState {
     friend int main(int argc, char* argv[]); // TODO remove
-public:
-    GameState(Board& board);
+    public:
+    // GameState(Board& board);
+    GameState(Board& board, const std::string& inputFilename);  // updated
 
     // Primary step update function
     bool step(Action p1Action, Action p2Action);
@@ -51,8 +54,8 @@ private:
     std::set<size_t> toRemove;
     std::map<std::pair<int, int>, std::vector<size_t>> positionMap;
     int stepCounter = 0;  // Add to private section
-
     // Internal logic
     void applyAction(Tank& tank, Action action);
     std::pair<int, int> findTank(CellContent tankSymbol);
+    std::ofstream logFile;
 };

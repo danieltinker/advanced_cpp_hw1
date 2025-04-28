@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 project(TankGame)
 
-set(CMAKE_CXX_STANDARD 17)
+# Compiler settings
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Add warning flags exactly as you asked
+add_compile_options(-Wall -Wextra -Werror -pedantic)
 
 # Source files
 set(SOURCES
@@ -13,7 +18,7 @@ set(SOURCES
     TankAlgorithm.cpp
 )
 
-# Header files (for IDE clarity, not required for build)
+# Header files (optional, for IDEs only)
 set(HEADERS
     Board.h
     Tank.h
