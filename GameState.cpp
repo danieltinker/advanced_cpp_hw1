@@ -5,7 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-
+#include <filesystem>
+#include <iostream>
+#include <string>
+#include <filesystem>
 
 using namespace std;
 int emptyAmmoSteps = 0;
@@ -16,7 +19,10 @@ GameState::GameState(Board& board, const std::string& inputFilename)
         tank1([&] { auto [x1, y1] = findTank(CellContent::TANK1); return Tank(1, x1, y1, Direction::L); }()),
         tank2([&] { auto [x2, y2] = findTank(CellContent::TANK2); return Tank(2, x2, y2, Direction::R); }()) 
   {
-      std::string outputFilename = "output_" + inputFilename;
+    std::filesystem::path inputPath(inputFilename);
+    std::string outputFilename = (inputPath.parent_path() / ("output_" + inputPath.filename().string())).string();
+    
+    
       logFile.open(outputFilename);
       if (!logFile.is_open()) {
           throw std::runtime_error("Failed to open output file: " + outputFilename);

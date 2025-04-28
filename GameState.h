@@ -43,6 +43,8 @@ class GameState {
     void checkGameEndConditions(Action p1Action, Action p2Action);
     bool handleShellMidStepCollision(int x, int y);
 
+    std::string actionToString(Action a) const;
+
 
 private:
     Board& board;
