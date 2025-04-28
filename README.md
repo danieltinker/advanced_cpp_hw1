@@ -1,8 +1,8 @@
-🚀 Tank Battle Simulator
+# Tank Battle Simulator
 A C++ project that simulates a two-player tank battle on a dynamic board.
 Each player controls a tank that can move, rotate, shoot, and interact with mines, walls, and shells.
 
-📂 Project Structure
+## Project Structure
 
 File	        Purpose
 main.cpp	       Runs the game loop
@@ -13,7 +13,7 @@ TankAlgorithm.h    TankAlgorithm.cpp	Algorithms for tank decision making (chase/
 CMakeLists.txt     Build configuration
 
 
-🛠️ How to Build
+## How to Build
 This project uses CMake for easy compilation.
 
 Quick build instructions:
@@ -28,11 +28,11 @@ After building, you'll have an executable called:
 ./tank_game
 
 
-🎮 How to Run (inputs)
+## How to Run (inputs)
 ./tank_game board.txt
 Where board.txt is a text file representing the initial state of the game board.
 
-🧩 Board File Format
+## Board File Format
 Example:
 
 7 5
@@ -43,7 +43,7 @@ Example:
 #######
 
 Symbol	Meaning
-#	Wall (takes 2 hits to destroy)
+\#	Wall (takes 2 hits to destroy)
 @	Mine (destroys tank immediately if stepped on)
 1	Player 1's tank (starts facing Left)
 2	Player 2's tank (starts facing Right)
@@ -51,7 +51,7 @@ Empty space
 
 
 
-📝 Game Logging (Outputs):
+## Game Logging (Outputs):
 
 Output written to output_<inputfile>.txt:
 - All requested actions (even invalid ones)
@@ -62,7 +62,7 @@ Input Errors Log:
 -  If input file has recoverable errors (e.g. extra tanks, wrong dimensions, unknown symbols),
 details are written into input_errors.txt (only if errors exist).
 
-🎯 Game Rules:
+## Game Rules:
 - Tanks can move forward, rotate, shoot, or move backward (with delay).
 - Shells move twice as fast as tanks.
 - Stepping on a mine destroys a tank instantly.
@@ -70,7 +70,7 @@ details are written into input_errors.txt (only if errors exist).
 - If both tanks run out of ammo and 40 more turns pass, the game ends in a tie.
 
 
-👨‍💻 Contributors
+## Contributors
 Daniel Baruch 315634022
 Evyatar Oren 331684530
 

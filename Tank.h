@@ -16,7 +16,7 @@ enum class Action {
     ROTATE_LEFT_QUARTER,
     ROTATE_RIGHT_QUARTER,
     SHOOT,
-    NONE // in case of no valid action
+    NONE
 };
 
 
@@ -25,7 +25,6 @@ class Tank {
 public:
     Tank(int playerId, int x, int y, Direction dir);
 
-    // Getters
     int getPlayerId() const;
     std::pair<int, int> getPosition() const;
     Direction getDirection() const;
@@ -36,15 +35,12 @@ public:
     // Called every game step
     void updateCooldowns();
 
-    // Move intent logic
     void requestBackward();
     void cancelBackwardRequest();
     void confirmBackwardMove();
 
-    // Shoot logic
     void shoot();
 
-    // Movement + Direction
     void rotateLeftEighth();
     void rotateRightEighth();
     void rotateLeftQuarter();

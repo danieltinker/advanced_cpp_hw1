@@ -109,7 +109,7 @@ std::string toString(Direction dir) {
         case Direction::L:  return "←";
         case Direction::UL: return "↖";
     }
-    return "🔃"; // Fallback
+    return "?"; // Fallback
 }
 std::string toString(Action ac){
     switch (ac) {

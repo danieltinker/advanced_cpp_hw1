@@ -306,8 +306,21 @@ void GameState::checkGameEndConditions(Action p1Action, Action p2Action) {
         logFile.close();
     }
     logFile << "STEP " << stepCounter++ << ":\n";
-    logFile << "P1 requested: " << static_cast<int>(p1Action) << "\n";
-    logFile << "P2 requested: " << static_cast<int>(p2Action) << "\n";
+    logFile << "P1 requested: " << actionToString(p1Action) << "\n";
+    logFile << "P2 requested: " << actionToString(p2Action) << "\n";
+}
+
+std::string actionToString(Action a){
+switch (a) {
+    case Action::MOVE_FORWARD: return "MOVE_FORWARD";
+    case Action::MOVE_BACKWARD: return "MOVE_BACKWARD";
+    case Action::ROTATE_LEFT_EIGHTH: return "ROTATE_LEFT_EIGHTH";
+    case Action::ROTATE_RIGHT_EIGHTH: return "ROTATE_RIGHT_EIGHTH";
+    case Action::ROTATE_LEFT_QUARTER: return "ROTATE_LEFT_QUARTER";
+    case Action::ROTATE_RIGHT_QUARTER: return "ROTATE_RIGHT_QUARTER";
+    case Action::SHOOT: return "SHOOT";
+    default: return "UNKNOWN_ACTION";
+}
 }
 
 
