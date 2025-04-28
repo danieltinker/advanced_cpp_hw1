@@ -6,8 +6,15 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Add warning flags exactly as you asked
+# Add warning flags exactly as required
 add_compile_options(-Wall -Wextra -Werror -pedantic)
+
+# Check GCC version >= 11.4
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11.4)
+        message(FATAL_ERROR "GCC version must be at least 11.4!")
+    endif()
+endif()
 
 # Source files
 set(SOURCES
@@ -18,7 +25,7 @@ set(SOURCES
     TankAlgorithm.cpp
 )
 
-# Header files (optional, for IDEs only)
+# Header files (optional, just for IDE clarity)
 set(HEADERS
     Board.h
     Tank.h
