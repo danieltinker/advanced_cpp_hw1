@@ -29,8 +29,12 @@ After building, you'll have an executable called:
 
 
 ## How to Run (inputs)
-./tank_game board.txt
-Where board.txt is a text file representing the initial state of the game board.
+./tank_game <board_file_path>.txt
+
+Example:
+./tank_game ../input_a.txt
+
+Where <board_file_path>.txt is a text file representing the initial state of the game board.
 
 ## Board File Format
 Example:
